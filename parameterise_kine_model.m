@@ -1,4 +1,4 @@
-function params = parameterise_kine_model(hardpoints)
+function params = parameterise_kine_model(hardpoints, f)
 
 params.hardpoints_front = hardpoints;
 %Upper wishbone
@@ -103,6 +103,25 @@ params.damper.stroke = 57;
 params.damper.min_length = params.damper.max_length - params.damper.stroke;
 
 %Model inputs
-params.inputs.wheel_z = timeseries([zeros(1,100) linspace(0,-25,8) -25 -25 linspace(-25, 25, 100)],linspace(0,2,210));
-params.inputs.damper_l = timeseries([180*ones(1,100) linspace(180,200,8) 200 200 linspace(200,200-57,100)],linspace(0,2,210));
-params.inputs.tr_y = timeseries([linspace(-30, 30, 100) linspace(12.5,0,8) zeros(1,102)],linspace(0,2,210));
+% FREQUENCY SWEEP:
+N = 2000;     % Number of time points
+% f = 15;       % Actuation frequency (Hz)
+t = 5;       % Duration of actuation (s)
+t_s = 2;       % Settling time before actuation begins (s)
+N_s = 50;       % No. of points in settling
+a = 25;      % Amplitude in mm of Bump
+z_0 = 0;    % actuator initial position (mm)
+
+w = f*2*pi;
+t_array = linspace(0, t, N);
+signal_in = a*sin(w*t_array);
+% plot(t_array, signal_in)
+
+params.inputs.wheel_z = timeseries([zeros(1,N_s)+z_0, signal_in+z_0], linspace(0,t+t_s,N+N_s)); % linspace(100,0,N_s)
+params.inputs.tr_y = timeseries([zeros(1,N+N_s)], linspace(0,t+t_s,N+N_s));
+
+
+% ORIGINAL:
+% params.inputs.wheel_z = timeseries([zeros(1,100) linspace(0,-25,8) -25 -25 linspace(-25, 25, 100)],linspace(0,2,210));
+% params.inputs.damper_l = timeseries([180*ones(1,100) linspace(180,200,8) 200 200 linspace(200,200-57,100)],linspace(0,2,210));
+% params.inputs.tr_y = timeseries([linspace(-30, 30, 100) linspace(12.5,0,8) zeros(1,102)],linspace(0,2,210));

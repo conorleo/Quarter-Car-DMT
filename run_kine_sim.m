@@ -1,4 +1,4 @@
-function simOut = run_kine_sim(model_name,hardpoints,varargin)
+function simOut = run_kine_sim(model_name,hardpoints,f,varargin)
 
 addpath([pwd '\functions'])
 addpath([pwd '\geometries'])
@@ -33,7 +33,7 @@ else
 end
 
 disp("Parameterising model...")
-params = parameterise_kine_model(hardpoints_front);
+params = parameterise_kine_model(hardpoints_front,f);
 
 % assignin('base','params',params);
 

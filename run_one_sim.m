@@ -1,11 +1,10 @@
-clear
-close all
+function sims = run_one_sim(f)
 
-hardpoint_files = {[pwd char("/geometries/EV21_front.mat")]
-    [pwd char("/geometries/EV21_rear.mat")]};
+% hardpoint_files = {[pwd char("/geometries/EV21_front.mat")]
+%     [pwd char("/geometries/EV21_rear.mat")]};
 
-% hardpoint_files = {[pwd char("/geometries/EV3 Front Hardpoints 13.01.19.mat")]
-%     [pwd char("/geometries/Final Rear Outboard 01.02.19.mat")]};
+hardpoint_files = {[pwd char("/geometries/EV3 Front Hardpoints 13.01.19.mat")]
+    [pwd char("/geometries/Final Rear Outboard 01.02.19.mat")]};
 
 % hardpoint_files = {[pwd char("/kinematics/geometries/Final Rear Outboard 01.02.19.mat")]};
 %     
@@ -26,8 +25,8 @@ hardpoint_files = {[pwd char("/geometries/EV21_front.mat")]
 
 model_name = 'Kinematics_Sim';
 sims = cell(length(hardpoint_files),1);
-for i = 1:length(hardpoint_files)
-    sims{i} = run_kine_sim(model_name,hardpoint_files{i});
+for i = 1:1     % length(hardpoint_files)
+    sims{i} = run_kine_sim(model_name,hardpoint_files{i}, f);
 end
 
 for i = 1:length(hardpoint_files)
