@@ -103,22 +103,27 @@ params.damper.stroke = 57;
 params.damper.min_length = params.damper.max_length - params.damper.stroke;
 
 %Model inputs
+% DAMPER SETTINGS:
+load([pwd char('/damper_settings/HS0202B.mat')]);
+params.damp_set = HS0202B;
+
 % FREQUENCY SWEEP:
 N = 2000;     % Number of time points
 % f = 15;       % Actuation frequency (Hz)
-t = 5;       % Duration of actuation (s)
+t = 2;       % Duration of actuation (s)
 t_s = 2;       % Settling time before actuation begins (s)
-N_s = 50;       % No. of points in settling
+N_s = round((t_s/(t+t_s))*N);       % No. of points in settling
+N_a = N-N_s; % No. of points in actuation
 a = 25;      % Amplitude in mm of Bump
 z_0 = 0;    % actuator initial position (mm)
 
 w = f*2*pi;
-t_array = linspace(0, t, N);
+t_array = linspace(0, t, N_a);
 signal_in = a*sin(w*t_array);
 % plot(t_array, signal_in)
 
-params.inputs.wheel_z = timeseries([zeros(1,N_s)+z_0, signal_in+z_0], linspace(0,t+t_s,N+N_s)); % linspace(100,0,N_s)
-params.inputs.tr_y = timeseries([zeros(1,N+N_s)], linspace(0,t+t_s,N+N_s));
+params.inputs.wheel_z = timeseries([zeros(1,N_s)+z_0, signal_in+z_0], linspace(0,t+t_s,N)); % linspace(100,0,N_s)
+params.inputs.tr_y = timeseries([zeros(1,N)], linspace(0,t+t_s,N));
 
 
 % ORIGINAL:

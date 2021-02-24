@@ -200,12 +200,12 @@ for i = 1:roll_data_length %Calculate roll properties
     [RCH_roll(i,1),RCH_roll(i,2)] = lineintersect([wheel_loc_up(i,:) IC_up(i,:)],[wheel_loc_down(i,:) IC_down(i,:)]);
 end
 
-simOut.channels.RCH_roll = RCH_roll;
-simOut.channels.a_roll = a_roll';
-simOut.channels.IC_roll_up = IC_up;
-simOut.channels.IC_roll_down = IC_down;
-simOut.channels.wheel_roll_up = wheel_loc_up;
-simOut.channels.wheel_roll_down = wheel_loc_down;
+% simOut.channels.RCH_roll = RCH_roll;
+% simOut.channels.a_roll = a_roll';
+% simOut.channels.IC_roll_up = IC_up;
+% simOut.channels.IC_roll_down = IC_down;
+% simOut.channels.wheel_roll_up = wheel_loc_up;
+% simOut.channels.wheel_roll_down = wheel_loc_down;
 
 %% Metrics
 % Calculates several useful parameters for at-a-glance sim result analysis
