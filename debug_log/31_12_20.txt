@@ -1,0 +1,10 @@
+Debug Log - Simscape - 31.12.20
+
+Aim: Implement different damper settings
+
+12:49 - Change damper to HS0202B
+
+12:50 - Change settle time, Ts from 1.2 to 1.5s
+	Still not reached equlibrium.
+12:55 - Ts to 2s and T to 2s
+	Worked! Now there is enough time to reach equlibrium before and after actuation.

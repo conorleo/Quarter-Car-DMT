@@ -1,0 +1,23 @@
+Debug Log - Simscape - 30.12.20
+
+Aim: Log results to workspace.
+
+11:34 - Change duration of actuation, t to 2.5s to stop instabilities premature ending whilst capturing ss response.
+ 	sim broke sooner (after 1.5s instead of 4s) hence change back to t=5
+11:41 - Reduce step size from 0.005 to 0.001 in config params solver settings
+	Worked! (ran to completion without error1) (BUT run time significantly increased)
+
+Sub-aim: stop logging RCH_Roll & other parameters
+
+11:57 - Comment out lines 203-208 in run_kine_sim
+	Worked
+12:08 - Increase step size to 0.003s & change line 32 in run_one_sim from: for i = 1:length(hardpoint_files) to: for i = 1:1
+	Worked!
+12:14 - Comment out lines 43-67 in run_one_sim to prevent plotting of variables commented out at 11:57
+	Worked!
+12:38 - Update logging lines 9-22 in frquency_sweep.m
+	Worked!
+12:51 - Receive results folder input in frequency_sweep.m
+	Worked!
+13:06 - Separate Fx_s and Fy_s in logging in frequency_sweep.m
+	Worked!

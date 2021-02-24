@@ -1,0 +1,31 @@
+Debug Log - Simscape - 29.12.20
+
+Aim: Fix error1 = 'sim stopped due to singularity in ____ joint.'
+
+17:41 - change consistency tolearance from 1e-6 to 1e-3 in solver config block
+	Different error (error2 = 'sim stopped after___s')
+17:42 - change consistency tolearance from 1e-3 to 1e-4 in solver config block
+	Original error (error1)
+17:43 - change consistency tolearance from 1e-4 to 5e-4 in solver config block
+	error2
+17:45 - change consistency tolearance from 5e-4 to 3e-4 in solver config block
+	error1
+17:46 - change consistency tolearance from 3e-4 to 4e-4 in solver config block
+	error2
+17:47 - change consistency tolearance from 4e-4 to 3.5e-4 in solver config block
+	error1
+17:55 - change consistency tolearance from 3.5e-4 to 1e-1 in solver config block
+	works for all frequencies!
+17:57 - change consistency tolearance from 1e-1 to 1e-2 in solver config block
+	error2
+17:59 - tick 'start from equilibirium' in solver config block on 0 Hz to see if intial oscillations are removed
+	vibrations damped after 0.8s (no difference to normal)
+18:16 - solver struggles to last long durations at higher frequencies
+
+18:17 - Adapted paramertise_kine_model to wait 1.2s before running at every frequency
+	All vibrations gone before start hence it works.
+18:24 - Log damper position, x_damp to workspace with scope off l_damper.
+
+18:28 - Log sprung mass position and velocity
+
+18:31 - Units of sprung mass and damper signals converted to appropriate
